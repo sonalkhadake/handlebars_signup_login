@@ -28,6 +28,21 @@ module.exports={
     res.redirect("/home")
     })
       
+    },
+
+    logincredentials:function(req,res){
+        const email = req.body.email
+        const password = req.body.password
+        const usermail= User.findOne({email:email}).then((data)=>{
+          if(data.password===password){
+            res.redirect("/home")
+          }else{
+            res.json({message:"invalid password"})
+          }
+          // console.log(usermail)
+        }).catch((err)=>{
+          console.log("entered credentials are invalid")
+        })
     }
     
     
